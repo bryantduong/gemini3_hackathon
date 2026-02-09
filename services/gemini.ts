@@ -267,7 +267,7 @@ export const chatWithGemini = async (
   context: TransformedDocument,
   profile: ProfileType
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey:  });
+  const ai = new GoogleGenAI({ apiKey:  import.meta.env.VITE_API_KEY });
   
   const chat = ai.chats.create({
     model: MODEL_NAME_CHAT,

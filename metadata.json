@@ -1,0 +1,8 @@
+{
+  "name": "ReFormat - Neurodiverse Learning Tool",
+  "description": "An adaptive document transformer that restructures learning materials for Dyslexia, ADHD, Dyscalculia, and more using Gemini.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

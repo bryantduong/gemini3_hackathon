@@ -154,7 +154,7 @@ export const transformDocument = async (
   mimeType: string,
   profile: ProfileType
 ): Promise<TransformedDocument> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
   
   const parts = [];
   if (mimeType.startsWith('image/') || mimeType === 'application/pdf') {
@@ -186,7 +186,7 @@ export const transformDocument = async (
 };
 
 export const generateSpeech = async (text: string): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
   const response = await ai.models.generateContent({
     model: MODEL_NAME_TTS,
     contents: [{ parts: [{ text }] }],
@@ -210,7 +210,7 @@ export const generateEducationalVideo = async (topic: string, detail: string): P
       throw new Error("API_KEY_SELECTION_REQUIRED");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
   const prompt = `Educational video clip, high school teacher style, explaining: ${topic}. ${detail}. Clear diagram, professional, educational animation, 16:9.`;
 
   let operation = await ai.models.generateVideos({
@@ -232,7 +232,7 @@ export const generateEducationalVideo = async (topic: string, detail: string): P
   if (!uri) throw new Error("Video generation failed");
   
   // Append API key for playback
-  return `${uri}&key=${process.env.API_KEY}`;
+  return `${uri}&key=${import.meta.env.VITE_API_KEY}`;
 };
 
 export const getAudioFeedback = async (
@@ -240,7 +240,7 @@ export const getAudioFeedback = async (
   documentContext: TransformedDocument,
   profile: ProfileType
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
   
   // Truncate context to save tokens if needed, but usually fine
   const contextStr = `Title: ${documentContext.title}. Summary: ${documentContext.audioScript.substring(0, 500)}...`;
@@ -267,7 +267,7 @@ export const chatWithGemini = async (
   context: TransformedDocument,
   profile: ProfileType
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey:  });
   
   const chat = ai.chats.create({
     model: MODEL_NAME_CHAT,
